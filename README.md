@@ -1,3 +1,39 @@
+I used Python Flask framework to complete the test. You need to the following things setup in your machine.
+1) Python 3
+2) Ability to execute `pip` command
+3) MySql
+
+There is a `tables.sql` file in `sql` folder of the project. Execute the queries in your mysql DB.
+This will create a database name `mydb` and two tables `work_log` and `report_ids_processed`.
+Then in `config.py` file update the value of `SQLALCHEMY_DATABASE_URI` variable with your mysql setup.
+Update `root:tulip@localhost` entry. Here `root` is username, `tulip` is password, `localhost` is the host.
+
+Please execute the following commands from the project root folder
+1) python3 -m venv venv
+2) . venv/bin/activate
+3) pip install Flask
+4) pip install flask-sqlalchemy
+5) pip install mysqlclient
+6) export FLASK_APP=.
+7) flask run
+
+In your browser you can hit http://127.0.0.1:5000/ to check if application is running.
+It will show you  `Application is up`
+
+There are two end points in the application. I added postman collection in the repo. 
+It is in `postman` directory. Feel free to use those.
+1) To upload and parse csv file http://127.0.0.1:5000/upload. Files will be uploaded in 
+`upload` directory of the project. Code will create the directory if not exists.
+2) To view report http://127.0.0.1:5000/reports
+
+Answer to the questions
+1) I did manual testing using postman for different scenarios like trying to upload same file, 
+change the header text, upload different file. Check if the report is correct.
+2) For production, I would avoid putting raw database credentials in the application. I prefer reading those from a secret manager.
+I want to add some unit test and have a CI/CD setup to run those tests.
+3) I couldn't add any unit test. In `/reports` end point object properties are showing in ascending order. If I spend some more time, I will
+try to show in the order it is showing in sample provided.
+
 # Wave Software Development Challenge
 
 Applicants for the Full-stack Developer role at Wave must
