@@ -9,13 +9,18 @@ Then in `config.py` file update the value of `SQLALCHEMY_DATABASE_URI` variable 
 Update `root:tulip@localhost` entry. Here `root` is username, `tulip` is password, `localhost` is the host.
 
 Please execute the following commands from the project root folder
-1) python3 -m venv venv
-2) . venv/bin/activate
-3) pip install Flask
-4) pip install flask-sqlalchemy
-5) pip install mysqlclient
+
+1) pip install Flask
+2) pip install flask-sqlalchemy
+3) pip install mysqlclient
+4) python3 -m venv venv
+5) . venv/bin/activate
 6) export FLASK_APP=.
 7) flask run
+
+**Note: If you have issue saying `No Module found` when you run `flask run`
+you can try step 1,2,3 again (this time you are in venv). If you see error `Could not locate a Flask application. You did not provide the "FLASK_APP" environment variable`
+you need to do step 6.
 
 In your browser you can hit http://127.0.0.1:5000/ to check if application is running.
 It will show you  `Application is up`
