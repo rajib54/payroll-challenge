@@ -19,7 +19,7 @@ Please execute the following commands from the project root folder
 7) flask run
 
 **Note: If you have issue saying `No Module found` when you run `flask run`
-you can try step 1,2,3 again (this time you are in venv). If you see error `Could not locate a Flask application. You did not provide the "FLASK_APP" environment variable`
+you can try step 1,2,3 again (this time you are in venv) and restart terminal. If you see error `Could not locate a Flask application. You did not provide the "FLASK_APP" environment variable`
 you need to do step 6.
 
 In your browser you can hit http://127.0.0.1:5000/ to check if application is running.
