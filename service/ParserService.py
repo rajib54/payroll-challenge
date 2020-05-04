@@ -28,6 +28,8 @@ class ParserService:
                         return False
                 else:
                     self.workloghandler.insert_work_log(self.convert_date_form(row[0]), row[1], row[2], row[3])
+            if line == 0:
+                return False
         return True
 
     def convert_date_form(self, date):
