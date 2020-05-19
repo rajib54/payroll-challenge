@@ -11,19 +11,21 @@ class ReportService:
         dict = {}
         works = self.dbhandler.get_work_logs()
         for work in works:
-            amountpaid = self.get_amount_paid(work.hours_worked, work.job_group)
             day = '16' if work.work_perfrom_date.day > 15 else '01'
             month = '0' + str(work.work_perfrom_date.month) if work.work_perfrom_date.month < 10 else str(work.work_perfrom_date.month)
             key = str(work.employee_id) + "_" + str(work.work_perfrom_date.year) + "-" + month + "-" + day
 
             if key in dict:
-                dict[key]['amountPaid'] += amountpaid
+                dict[key]['hoursWorked'] += work.hours_worked
+                amountpaid = self.get_amount_paid(dict[key]['hoursWorked'], work.job_group)
+                dict[key]['amountPaid'] = amountpaid
             else:
                 if day == '01':
                     enddate = str(work.work_perfrom_date.year) + "-" + month + "-15"
                 else:
                     enddate = str(work.work_perfrom_date.year) + "-" + month + "-" + str(self.get_last_day_of_month(work.work_perfrom_date.year, work.work_perfrom_date.month))
-                dict[key] = {'amountPaid': amountpaid, 'endDate': enddate}
+                amountpaid = self.get_amount_paid(work.hours_worked, work.job_group)
+                dict[key] = {'amountPaid': amountpaid, 'endDate': enddate, 'hoursWorked': work.hours_worked}
 
         reports = []
         for key, value in dict.items():
@@ -48,6 +50,8 @@ class ReportService:
 
     def get_amount_paid(self, hoursWorked, jobGroup):
         if jobGroup == 'A':
+            if hoursWorked > 60:
+                return (60 * 20) + ((hoursWorked - 60) * 20 * 1.5)
             return hoursWorked * 20
         elif jobGroup == 'B':
             return hoursWorked * 30
